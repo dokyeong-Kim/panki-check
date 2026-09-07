@@ -1,0 +1,371 @@
+{
+  "_comment": "판정 규칙. 이 파일의 숫자만 바꾸면 판정이 전부 따라 바뀝니다. 스크립트는 건드리지 마세요.",
+  "region": {
+    "name": "서울",
+    "asos_stn": "108",
+    "mid_temp_regId": "11B10101",
+    "nx": 60,
+    "ny": 127
+  },
+  "datalab": {
+    "window_start": "2022-01-01",
+    "keywords": {
+      "후드집업": [
+        "후드집업",
+        "기모후드집업"
+      ],
+      "후드티": [
+        "후드티",
+        "기모후드티"
+      ],
+      "플리스": [
+        "플리스",
+        "후리스"
+      ]
+    },
+    "_keyword_note": "AZA 확정(2026-09-02): 기모 계열은 검색량이 작아 본 키워드에 합산. 2022~2026 원계열과 4시즌 적합 전부 이 병합 기준이다. 기모후드집업 별도 추적은 하지 않는다."
+  },
+  "rules": {
+    "hoodzip_start": {
+      "stage": "검색시작",
+      "method": "calendar",
+      "anchor": "08-12",
+      "window": "08-09~08-15",
+      "fit_sd_days": 2.5,
+      "typical_tmin_at_stage": 25.9,
+      "status": "FITTED",
+      "evidence": "실측 2022-08-12 / 2023-08-12 / 2024-08-15 / 2025-08-09 / 2026-08-13. 기온 룰은 전부 8/1 탐색 경계에 붙어(최저 28℃가 4년 중 3년 8/1) 실질은 '8/1+N일'이라 폐기. 달력 유지."
+    },
+    "hoodie_start": {
+      "stage": "검색시작",
+      "method": "calendar",
+      "anchor": "08-11",
+      "window": "08-08~08-14",
+      "fit_sd_days": 2.3,
+      "typical_tmin_at_stage": 26.0,
+      "status": "FITTED",
+      "evidence": "실측 2022-08-10 / 2023-08-10 / 2024-08-14 / 2025-08-09 / 2026-08-08. 기온 룰은 전부 8/1 탐색 경계에 붙어(최저 28℃가 4년 중 3년 8/1) 실질은 '8/1+N일'이라 폐기. 달력 유지."
+    },
+    "fleece_start": {
+      "stage": "검색시작",
+      "method": "calendar",
+      "anchor": "08-29",
+      "window": "08-21~09-04",
+      "fit_sd_days": 5.2,
+      "typical_tmin_at_stage": 24.4,
+      "status": "FITTED",
+      "evidence": "실측 2022-08-21 / 2023-08-31 / 2024-08-30 / 2025-09-04 / 2026-08-24. 최적 기온룰(최저 27℃ +27일 ±4.7)은 리드가 27일로 길고 경계 인접이라 채택 안 함."
+    },
+    "hoodzip_surge": {
+      "stage": "급상승",
+      "metric": "tavg",
+      "threshold": 28.0,
+      "direction": "below",
+      "consecutive_days": 5,
+      "lead_days": 9,
+      "fit_sd_days": 4.0,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "08-23",
+        "sd_days": 9.6,
+        "history": [
+          "2022-08-08",
+          "2023-08-22",
+          "2024-08-30",
+          "2025-09-01"
+        ]
+      },
+      "evidence": "실측 2022-08-24 / 2023-08-30 / 2024-09-05 / 2025-09-08. 평균 28℃ 5일 연속 하향 +9일, 편차 4.0일(달력 5.9). 트리거일 08-08/08-22/08-30/09-01로 경계 아님."
+    },
+    "hoodie_surge": {
+      "stage": "급상승",
+      "metric": "tavg",
+      "threshold": 28.0,
+      "direction": "below",
+      "consecutive_days": 5,
+      "lead_days": 10,
+      "fit_sd_days": 2.9,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "08-23",
+        "sd_days": 9.6,
+        "history": [
+          "2022-08-08",
+          "2023-08-22",
+          "2024-08-30",
+          "2025-09-01"
+        ]
+      },
+      "evidence": "실측 2022-08-23 / 2023-08-30 / 2024-09-07 / 2025-09-10. 평균 28℃ 5일 +10일, 편차 2.9일(달력 7.2). 집업과 같은 트리거, 리드만 1일 길다."
+    },
+    "fleece_surge": {
+      "stage": "급상승",
+      "metric": "tmin",
+      "threshold": 14.0,
+      "direction": "below",
+      "consecutive_days": 1,
+      "lead_days": 2,
+      "fit_sd_days": 1.3,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "10-02",
+        "sd_days": 7.8,
+        "history": [
+          "2022-09-21",
+          "2023-10-02",
+          "2024-10-01",
+          "2025-10-13"
+        ]
+      },
+      "evidence": "실측 2022-09-25 / 2023-10-05 / 2024-10-02 / 2025-10-14. 최저 14℃ 최초 하향 +2일, 편차 1.3일. 집업·후드티보다 한 달 늦다."
+    },
+    "hoodzip_peak": {
+      "stage": "피크",
+      "metric": "tmin",
+      "threshold": 12.5,
+      "direction": "below",
+      "consecutive_days": 2,
+      "lead_days": 5,
+      "fit_sd_days": 0.7,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "10-08",
+        "sd_days": 6.2,
+        "history": [
+          "2022-10-07",
+          "2023-10-05",
+          "2024-10-02",
+          "2025-10-19"
+        ]
+      },
+      "evidence": "실측 2022-10-12 / 2023-10-09 / 2024-10-07 / 2025-10-25. 편차 0.7일, 룰셋 최강."
+    },
+    "hoodie_peak": {
+      "stage": "피크",
+      "metric": "tmin",
+      "threshold": 15.0,
+      "direction": "below",
+      "consecutive_days": 5,
+      "lead_days": 8,
+      "fit_sd_days": 1.1,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "10-06",
+        "sd_days": 6.9,
+        "history": [
+          "2022-10-04",
+          "2023-10-01",
+          "2024-10-01",
+          "2025-10-18"
+        ]
+      },
+      "evidence": "실측 2022-10-13 / 2023-10-09 / 2024-10-07 / 2025-10-26."
+    },
+    "fleece_peak": {
+      "stage": "피크",
+      "metric": "tmin",
+      "threshold": 11.0,
+      "direction": "below",
+      "consecutive_days": 5,
+      "lead_days": 6,
+      "fit_sd_days": 1.2,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "10-27",
+        "sd_days": 11.2,
+        "history": [
+          "2022-10-09",
+          "2023-11-06",
+          "2024-11-04",
+          "2025-10-26"
+        ]
+      },
+      "evidence": "실측 2022-10-13 / 2023-11-13 / 2024-11-10 / 2025-11-02. 달력 편차 12.3일이라 기온 룰이 압도적."
+    },
+    "hoodzip_end": {
+      "stage": "종료",
+      "metric": "tavg",
+      "threshold": 7.0,
+      "direction": "below",
+      "consecutive_days": 1,
+      "lead_days": 22,
+      "fit_sd_days": 6.4,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "11-11",
+        "sd_days": 6.1,
+        "history": [
+          "2022-11-04",
+          "2023-11-07",
+          "2024-11-17",
+          "2025-11-17"
+        ]
+      },
+      "evidence": "실측 2022-11-22 / 2023-11-25 / 2024-12-06 / 2025-12-20. 종료가 매년 늦어져(4년간 한 달) 편차가 크다. 2025만 리드 33일."
+    },
+    "fleece_end": {
+      "stage": "종료",
+      "metric": "tmax",
+      "threshold": 2.5,
+      "direction": "below",
+      "consecutive_days": 2,
+      "lead_days": 9,
+      "fit_sd_days": 4.2,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "12-11",
+        "sd_days": 11.8,
+        "history": [
+          "2022-11-30",
+          "2023-11-30",
+          "2024-12-21",
+          "2025-12-25"
+        ]
+      },
+      "evidence": "실측 2022-12-12 / 2023-12-14 / 2024-12-29 / 2025-12-28."
+    },
+    "hoodie_end": {
+      "stage": "종료",
+      "metric": "tmax",
+      "threshold": 21.0,
+      "direction": "above",
+      "consecutive_days": 4,
+      "lead_days": 4,
+      "fit_sd_days": 3.3,
+      "status": "FITTED",
+      "typical_trigger": {
+        "mmdd": "04-03",
+        "sd_days": 8.6,
+        "history": [
+          "2023-03-30",
+          "2024-04-11",
+          "2025-03-23",
+          "2026-04-12"
+        ]
+      },
+      "evidence": "실측 2023-04-07 / 2024-04-11 / 2025-03-29 / 2026-04-13. 봄 상향 트리거(2/1부터 탐색)."
+    },
+    "plateau": {
+      "band": 0.02,
+      "days": 3,
+      "status": "DERIVED",
+      "evidence": "7일평균이 3일 연속 ±2% 이내면 정체로 본다"
+    }
+  },
+  "lifecycle": {
+    "_comment": "품목 × 4단계. 시작은 달력, 급상승·피크·종료는 기온 트리거 + lead_days.",
+    "후드집업": {
+      "검색시작": "hoodzip_start",
+      "급상승": "hoodzip_surge",
+      "피크": "hoodzip_peak",
+      "종료": "hoodzip_end"
+    },
+    "후드티": {
+      "검색시작": "hoodie_start",
+      "급상승": "hoodie_surge",
+      "피크": "hoodie_peak",
+      "종료": "hoodie_end"
+    },
+    "플리스": {
+      "검색시작": "fleece_start",
+      "급상승": "fleece_surge",
+      "피크": "fleece_peak",
+      "종료": "fleece_end"
+    }
+  },
+  "notes": [
+    "검색시작은 기온으로 못 잡는다. 최적 기온룰이 8/1 탐색 경계에 붙어 실질은 '8/1+N일'이다. 달력 편차 2.3~5.2일.",
+    "급상승·피크·종료는 전부 기온 룰. 피크가 가장 강하다(편차 0.7~1.2일).",
+    "후드집업·후드티 급상승은 같은 트리거(평균 28℃ 5일 하향), 리드만 9일/10일 차이.",
+    "플리스는 시작이 2주, 급상승이 한 달 늦다. 브리핑에서 플리스가 먼저 나오면 정의가 깨진 것.",
+    "후드집업 종료가 매년 늦어진다: 11/22 → 11/25 → 12/6 → 12/20. 4년간 한 달.",
+    "피크 지수 4년간 반토막(집업 29.3→14.3). 판정과 별개로 물량 계획에 반영."
+  ],
+  "calibration": {
+    "fitted_on": "2026-09-03",
+    "seasons": [
+      2022,
+      2023,
+      2024,
+      2025
+    ],
+    "search_source": "네이버 데이터랩 일간 2022-01-01~2026-09-01, 3키워드 공통 정규화",
+    "temp_source": "기상청 ASOS 서울(108) 일자료 2022-01-01~2026-09-01",
+    "known_gap": "2022-08-08, 2022-12-02~12-31 기온 결측 30일. 해당 구간에 걸리는 트리거는 없었으나 2022 시즌 겨울 판정은 재확인 필요",
+    "stage_definition": {
+      "baseline": "7/15~8/10 7일평균의 최솟값(여름 저점). 구 정의(7/1~8/10 중앙값)는 6월 수요의 7월 감쇠 꼬리가 섞여 후드집업 베이스를 29% 부풀렸다",
+      "검색시작": "7일평균 ≥ 저점 × 배수, 3일 연속. 배수는 후드집업·후드티 1.5, 플리스 2.0 (AZA 확정 2026-09-03)",
+      "급상승": "7일평균 ≥ 저점 + 0.15×(전년 피크 − 저점), 3일 연속",
+      "피크": "8/15~익년 1/31 7일평균 최대일. 최대 후 7일 경과 + 10% 하락 시 확정",
+      "종료": "피크 이후 7일평균 ≤ 저점 + 0.20×(피크 − 저점), 3일 연속"
+    },
+    "method": "metric(최저/최고/평균) × 임계(0.5℃ 간격) × 유지일수(1~5일) 전수 탐색 후, 발화가 사건보다 앞서는 조합 중 4시즌 리드타임 편차 최소를 선택"
+  },
+  "forecast": {
+    "weathernews_url": "https://weathernews.com/weather/en/kr/bmVpZ2hib3Job29kLjE5MTY0Mjg0LDM3LjU2MTE0MywxMjcuMDA1NDE1/",
+    "_note": "AZA 지정 예보원(서울 장충동). 16일 일별 최고/최저. 기상청 API가 막힌 환경의 예보 대체원. tavg는 (최고+최저)/2 근사."
+  },
+  "temp_at_stage": {
+    "_comment": "단계 발생일 전후 7일 평균 최저기온(4시즌). 참고값.",
+    "후드집업": {
+      "검색시작": {
+        "tmin7": 24.5,
+        "lead_hist": [
+          -3,
+          0,
+          -15,
+          0
+        ]
+      },
+      "급상승": {
+        "tmin7": 21.9,
+        "lead_hist": [
+          -3,
+          -2,
+          -17,
+          -3
+        ]
+      }
+    },
+    "후드티": {
+      "검색시작": {
+        "tmin7": 24.7,
+        "lead_hist": [
+          -5,
+          -2,
+          -16,
+          0
+        ]
+      },
+      "급상승": {
+        "tmin7": 22.1,
+        "lead_hist": [
+          -4,
+          -2,
+          -15,
+          0
+        ]
+      }
+    },
+    "플리스": {
+      "검색시작": {
+        "tmin7": 22.8,
+        "lead_hist": [
+          -5,
+          2,
+          -22,
+          -4
+        ]
+      },
+      "급상승": {
+        "tmin7": 14.2,
+        "lead_hist": [
+          -2,
+          -1,
+          -3,
+          -6
+        ]
+      }
+    }
+  }
+}
